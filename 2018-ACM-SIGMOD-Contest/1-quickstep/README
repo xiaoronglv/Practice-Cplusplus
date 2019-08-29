@@ -1,0 +1,55 @@
+Team name:
+****
+Quickstep (formerly Robin)
+
+
+Members:
+****
+Jianqiao Zhu, jianqiao@cs.wisc.edu, University of Wisconsin-Madison, Computer Sciences, Ph.D. Program
+Zuyu Zhang, zuyu@cs.wisc.edu, University of Wisconsin-Madison, Computer Sciences, Ph.D. Program
+Dylan Bacon, dbacon@cs.wisc.edu, University of Wisconsin-Madison, Computer Sciences, Ph.D. Program
+
+
+Advisor:
+****
+Jignesh M. Patel, jignesh@cs.wisc.edu, University of Wisconsin-Madison, Computer Sciences, Professor
+
+
+Description of solution:
+****
+1. A push-style task-parallel scheduler.
+   - Supports dynamic task DAG (Directed Acyclic Graph) construction and subtask spawning.
+   - Supports fine-grained task labelling and profiling.
+2. An optimizer with a simple but effective cost model.
+   Some of the optimizations:
+   - Filter pushdown
+   - Join order optimization
+   - Semi-join reduction
+   - Constant and range propagation
+   - Predicate reduction
+   - Common aggregate-expression elimination
+3. Optimized query plans are converted into DAG of relational operators.
+   - Achieves high intra-operator parallelism.
+4. Various indexing techniques
+   - Existence bitmap
+   - Primary key index
+   - Foreign key index
+   - Count vector index
+5. Specialization of various relational operators, fusing joins and aggregations in most cases.
+   - Index scan, index lookup join, hash join, sort merge join.
+   - "Multiway" join fused with aggregation -- this is one of the critical operators.
+   - "Chain"/"Scan" join fused with aggregation.
+6. Preprocessing:
+   - Get min/max stats of each column.
+   - Compress each column if possible (simply truncating the leading 32-bit zeros).
+   - Build existence bitmap for each column, and use it to figure out whether the column is unique.
+   - Use existence maps to figure out containment relationship among columns.
+   - Build various indexes based on the dataset size.
+
+
+Third party packages:
+****
+gflags     BSD-3-Clause
+glog       BSD
+googletest BSD-3-Clause
+gperftools BSD-3-Clause

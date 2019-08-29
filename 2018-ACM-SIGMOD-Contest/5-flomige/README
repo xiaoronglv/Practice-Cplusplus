@@ -1,0 +1,40 @@
+team name:
+
+    FloMiGe
+
+
+team members:
+
+    Florian Wolf
+    florian.wolf@tu-ilmenau.de
+    PhD Candidate
+    TU Ilmenau
+    Database and Information Systems Group
+    Prof. Kai-Uwe Sattler
+
+    Michael Brendle
+    michael.brendle@uni.kn
+    Student (M.Sc.)
+    University of Konstanz
+    Database and Information Systems Group
+    Prof. Michael Grossniklaus
+
+    Georgios Psaropoulos
+    georgios.psaropoulos@epfl.ch
+    PhD Candidate
+    EPFL
+    DIAS
+    Prof. Anastasia Ailamaki
+
+
+brief description:
+
+    Textbook Query Processor branched from a Research Prototype:
+    - Dynamic programming join optimizer (DPSize) with filters being pushed down
+    - Execution Engine using push-based pipelining with batches and different memory-efficient hash joins
+    - Task-based parallelization
+    - Mid-query re-optimization to compensate cardinality estimation errors
+
+
+third party code:
+    - none

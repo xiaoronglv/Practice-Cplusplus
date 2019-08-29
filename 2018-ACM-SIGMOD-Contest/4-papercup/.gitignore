@@ -1,0 +1,13 @@
+cscope.*
+ctag
+build
+
+.*.swp
+workloads
+submission.tar.gz 
+
+
+cachegrind.*
+perf.*
+testcase_generator
+workload

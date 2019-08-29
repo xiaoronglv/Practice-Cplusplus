@@ -1,0 +1,230 @@
+add_subdirectory(aggregators)
+add_subdirectory(expressions)
+add_subdirectory(specializations)
+add_subdirectory(tests)
+add_subdirectory(utility)
+
+# Declare micro-libs:
+add_library(project_operators_AggregateOperator AggregateOperator.cpp AggregateOperator.hpp)
+add_library(project_operators_ChainedJoinAggregateOperator ChainedJoinAggregateOperator.cpp ChainedJoinAggregateOperator.hpp)
+add_library(project_operators_CreateTableViewOperator CreateTableViewOperator.cpp CreateTableViewOperator.hpp)
+add_library(project_operators_DropTableOperator ../empty_src.cpp DropTableOperator.hpp)
+add_library(project_operators_GeneralEquiJoinOperator GeneralEquiJoinOperator.cpp GeneralEquiJoinOperator.hpp)
+add_library(project_operators_HashJoinOperator HashJoinOperator.cpp HashJoinOperator.hpp)
+add_library(project_operators_IndexJoinAggregateOperator IndexJoinAggregateOperator.cpp IndexJoinAggregateOperator.hpp)
+add_library(project_operators_IndexJoinOperator IndexJoinOperator.cpp IndexJoinOperator.hpp)
+add_library(project_operators_MultiwayJoinAggregateOperator MultiwayJoinAggregateOperator.cpp MultiwayJoinAggregateOperator.hpp)
+add_library(project_operators_OperatorTypedefs ../empty_src.cpp OperatorTypedefs.hpp)
+add_library(project_operators_PrintOperator PrintOperator.cpp PrintOperator.hpp)
+add_library(project_operators_RelationalOperator ../empty_src.cpp RelationalOperator.hpp)
+add_library(project_operators_ScanJoinAggregateOperator ScanJoinAggregateOperator.cpp ScanJoinAggregateOperator.hpp)
+add_library(project_operators_SelectOperator SelectOperator.cpp SelectOperator.hpp)
+add_library(project_operators_SortMergeJoinOperator SortMergeJoinOperator.cpp SortMergeJoinOperator.hpp)
+
+# Link dependencies:
+target_link_libraries(project_operators_AggregateOperator
+                      project_operators_RelationalOperator
+                      project_operators_expressions_ExpressionSynthesizer
+                      project_operators_expressions_Predicate
+                      project_operators_expressions_Scalar
+                      project_scheduler_Task
+                      project_storage_ColumnStoreBlock
+                      project_storage_ColumnVector
+                      project_storage_Relation
+                      project_storage_TupleIdSequence
+                      project_types_Type
+                      project_utility_ContainerUtil
+                      project_utility_Macros)
+target_link_libraries(project_operators_ChainedJoinAggregateOperator
+                      glog
+                      project_operators_RelationalOperator
+                      project_operators_aggregators_BuildKeyCountVector
+                      project_operators_expressions_Predicate
+                      project_operators_expressions_Scalar
+                      project_operators_utility_KeyCountVector
+                      project_scheduler_SchedulerInterface
+                      project_scheduler_Task
+                      project_storage_ColumnAccessor
+                      project_storage_IndexManager
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_storage_TupleIdSequence
+                      project_utility_Macros
+                      project_utility_Range)
+target_link_libraries(project_operators_CreateTableViewOperator
+                      glog
+                      project_operators_RelationalOperator
+                      project_operators_expressions_Comparison
+                      project_operators_expressions_Scalar
+                      project_operators_expressions_ScalarAttribute
+                      project_operators_expressions_ScalarLiteral
+                      project_storage_AttributeStatistics
+                      project_storage_ColumnAccessor
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_utility_Macros
+                      project_utility_Range)
+target_link_libraries(project_operators_DropTableOperator
+                      project_operators_RelationalOperator
+                      project_storage_Database
+                      project_storage_Relation
+                      project_utility_Macros)
+target_link_libraries(project_operators_GeneralEquiJoinOperator
+                      glog
+                      project_operators_HashJoinOperator
+                      project_operators_OperatorTypedefs
+                      project_operators_RelationalOperator
+                      project_operators_SortMergeJoinOperator
+                      project_operators_expressions_Predicate
+                      project_scheduler_Task
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_utility_Macros)
+target_link_libraries(project_operators_HashJoinOperator
+                      glog
+                      project_operators_OperatorTypedefs
+                      project_operators_RelationalOperator
+                      project_operators_expressions_Predicate
+                      project_scheduler_Task
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_storage_TupleIdSequence
+                      project_types_Type
+                      project_utility_EventProfiler
+                      project_utility_HashFilter
+                      project_utility_HashTable
+                      project_utility_Macros
+                      project_utility_meta_Common
+                      project_utility_meta_TypeList)
+target_link_libraries(project_operators_IndexJoinAggregateOperator
+                      glog
+                      project_operators_OperatorTypedefs
+                      project_operators_RelationalOperator
+                      project_operators_expressions_ExpressionSynthesizer
+                      project_operators_expressions_Predicate
+                      project_operators_expressions_Scalar
+                      project_operators_expressions_ScalarAttribute
+                      project_operators_utility_ForeignKeySlotAccessor
+                      project_operators_utility_KeyCountVector
+                      project_scheduler_Task
+                      project_storage_ColumnAccessor
+                      project_storage_ColumnStoreBlock
+                      project_storage_ColumnVector
+                      project_storage_ForeignKeyIndex
+                      project_storage_IndexManager
+                      project_storage_PrimaryKeyIndex
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_storage_TupleIdSequence
+                      project_types_Type
+                      project_utility_ContainerUtil
+                      project_utility_EventProfiler
+                      project_utility_Macros
+                      project_utility_Range
+                      project_utility_ScopedArray)
+target_link_libraries(project_operators_IndexJoinOperator
+                      glog
+                      project_operators_OperatorTypedefs
+                      project_operators_RelationalOperator
+                      project_operators_expressions_Predicate
+                      project_operators_expressions_Scalar
+                      project_scheduler_Task
+                      project_storage_IndexManager
+                      project_storage_PrimaryKeyIndex
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_storage_TupleIdSequence
+                      project_types_Type
+                      project_utility_Macros)
+target_link_libraries(project_operators_MultiwayJoinAggregateOperator
+                      glog
+                      project_operators_OperatorTypedefs
+                      project_operators_RelationalOperator
+                      project_operators_aggregators_BuildKeyCountVector
+                      project_operators_expressions_Predicate
+                      project_operators_expressions_Scalar
+                      project_operators_expressions_ScalarAttribute
+                      project_operators_utility_KeyCountVector
+                      project_operators_utility_KeyCountVectorAccumulator
+                      project_operators_utility_MultiwayJoinContext
+                      project_scheduler_Task
+                      project_storage_Attribute
+                      project_storage_ColumnAccessor
+                      project_storage_ColumnStoreBlock
+                      project_storage_ColumnVector
+                      project_storage_Database
+                      project_storage_IndexManager
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_storage_TupleIdSequence
+                      project_types_Type
+                      project_utility_ContainerUtil
+                      project_utility_EventProfiler
+                      project_utility_HashFilter
+                      project_utility_Macros
+                      project_utility_Range
+                      project_utility_meta_MultipleDispatcher)
+target_link_libraries(project_operators_PrintOperator
+                      project_operators_RelationalOperator
+                      project_storage_Relation
+                      project_utility_Macros
+                      project_utility_StringUtil)
+target_link_libraries(project_operators_RelationalOperator
+                      project_scheduler_Task
+                      project_scheduler_TaskDescription
+                      project_utility_Macros)
+target_link_libraries(project_operators_ScanJoinAggregateOperator
+                      glog
+                      project_operators_OperatorTypedefs
+                      project_operators_RelationalOperator
+                      project_operators_expressions_Comparison
+                      project_operators_expressions_ComparisonType
+                      project_operators_expressions_Predicate
+                      project_operators_expressions_Scalar
+                      project_operators_expressions_ScalarAttribute
+                      project_operators_expressions_ScalarLiteral
+                      project_scheduler_Task
+                      project_storage_ColumnAccessor
+                      project_storage_ColumnStoreBlock
+                      project_storage_ColumnVector
+                      project_storage_Relation
+                      project_storage_StorageBlock
+                      project_storage_StorageTypedefs
+                      project_storage_TupleIdSequence
+                      project_types_Type
+                      project_utility_ContainerUtil
+                      project_utility_Macros)
+target_link_libraries(project_operators_SelectOperator
+                      glog
+                      project_operators_RelationalOperator
+                      project_operators_expressions_Comparison
+                      project_operators_expressions_Predicate
+                      project_operators_expressions_Scalar
+                      project_operators_expressions_ScalarAttribute
+                      project_operators_expressions_ScalarLiteral
+                      project_storage_Attribute
+                      project_storage_ColumnVector
+                      project_storage_ForeignKeyIndex
+                      project_storage_IndexManager
+                      project_storage_PrimaryKeyIndex
+                      project_storage_Relation
+                      project_storage_TupleIdSequence
+                      project_types_Type
+                      project_utility_BitVector
+                      project_utility_Macros)
+target_link_libraries(project_operators_SortMergeJoinOperator
+                      glog
+                      project_operators_OperatorTypedefs
+                      project_operators_RelationalOperator
+                      project_operators_expressions_Predicate
+                      project_scheduler_Task
+                      project_storage_ColumnVector
+                      project_storage_Relation
+                      project_storage_RowStoreBlock
+                      project_storage_StorageTypedefs
+                      project_storage_TupleIdSequence
+                      project_types_Type
+                      project_utility_ContainerUtil
+                      project_utility_Macros
+                      project_utility_Range
+                      project_utility_RowStoreBlockSorter)

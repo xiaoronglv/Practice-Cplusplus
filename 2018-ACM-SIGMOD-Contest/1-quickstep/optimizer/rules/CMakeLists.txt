@@ -1,0 +1,424 @@
+# Declare micro-libs:
+add_library(project_optimizer_rules_BottomUpRule ../../empty_src.cpp BottomUpRule.hpp)
+add_library(project_optimizer_rules_CollapseSelection CollapseSelection.cpp CollapseSelection.hpp)
+add_library(project_optimizer_rules_ConstantPropagation ConstantPropagation.cpp ConstantPropagation.hpp)
+add_library(project_optimizer_rules_CreateTableViews CreateTableViews.cpp CreateTableViews.hpp)
+add_library(project_optimizer_rules_EliminatePredicateLiteral EliminatePredicateLiteral.cpp EliminatePredicateLiteral.hpp)
+add_library(project_optimizer_rules_FuseOperators FuseOperators.cpp FuseOperators.hpp)
+add_library(project_optimizer_rules_GenerateJoins GenerateJoins.cpp GenerateJoins.hpp)
+add_library(project_optimizer_rules_GenerateSelection GenerateSelection.cpp GenerateSelection.hpp)
+add_library(project_optimizer_rules_LiftUpExtraEquiJoinPredicate LiftUpExtraEquiJoinPredicate.cpp LiftUpExtraEquiJoinPredicate.hpp)
+add_library(project_optimizer_rules_PopulateFilterOnJoinAttributes PopulateFilterOnJoinAttributes.cpp PopulateFilterOnJoinAttributes.hpp)
+add_library(project_optimizer_rules_PruneColumns PruneColumns.cpp PruneColumns.hpp)
+add_library(project_optimizer_rules_PushDownFilter PushDownFilter.cpp PushDownFilter.hpp)
+add_library(project_optimizer_rules_ReducePredicate ReducePredicate.cpp ReducePredicate.hpp)
+add_library(project_optimizer_rules_ReduceSemiJoin ReduceSemiJoin.cpp ReduceSemiJoin.hpp)
+add_library(project_optimizer_rules_ReorderJoins ReorderJoins.cpp ReorderJoins.hpp)
+add_library(project_optimizer_rules_ResolveAlias ResolveAlias.cpp ResolveAlias.hpp)
+add_library(project_optimizer_rules_ReuseAggregateExpressions ReuseAggregateExpressions.cpp ReuseAggregateExpressions.hpp)
+add_library(project_optimizer_rules_Rule ../../empty_src.cpp Rule.hpp)
+add_library(project_optimizer_rules_RuleUtil ../../empty_src.cpp RuleUtil.hpp)
+add_library(project_optimizer_rules_SpecializeChainedJoinAggregate SpecializeChainedJoinAggregate.cpp SpecializeChainedJoinAggregate.hpp)
+add_library(project_optimizer_rules_SpecializeForeignKeyIndexJoinAggregate SpecializeForeignKeyIndexJoinAggregate.cpp SpecializeForeignKeyIndexJoinAggregate.hpp)
+add_library(project_optimizer_rules_SpecializeMultiwayJoinAggregate SpecializeMultiwayJoinAggregate.cpp SpecializeMultiwayJoinAggregate.hpp)
+add_library(project_optimizer_rules_SpecializePrimaryKeyIndexJoin SpecializePrimaryKeyIndexJoin.cpp SpecializePrimaryKeyIndexJoin.hpp)
+add_library(project_optimizer_rules_SpecializePrimaryKeyIndexJoinAggregate SpecializePrimaryKeyIndexJoinAggregate.cpp SpecializePrimaryKeyIndexJoinAggregate.hpp)
+add_library(project_optimizer_rules_SpecializePrimaryKeyScanJoinAggregate SpecializePrimaryKeyScanJoinAggregate.cpp SpecializePrimaryKeyScanJoinAggregate.hpp)
+add_library(project_optimizer_rules_SpecializeSelection SpecializeSelection.cpp SpecializeSelection.hpp)
+add_library(project_optimizer_rules_TopDownRule ../../empty_src.cpp TopDownRule.hpp)
+add_library(project_optimizer_rules_UpdateExpression UpdateExpression.cpp UpdateExpression.hpp)
+
+# Link dependencies:
+target_link_libraries(project_optimizer_rules_BottomUpRule
+                      glog
+                      project_optimizer_rules_Rule
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_CollapseSelection
+                      glog
+                      project_optimizer_EquiJoin
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Scalar
+                      project_optimizer_Selection
+                      project_optimizer_rules_Rule
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_ConstantPropagation
+                      project_optimizer_AttributeReference
+                      project_optimizer_Comparison
+                      project_optimizer_EquiJoin
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_OptimizerContext
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_PredicateLiteral
+                      project_optimizer_Scalar
+                      project_optimizer_ScalarLiteral
+                      project_optimizer_Selection
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_CollapseSelection
+                      project_optimizer_rules_Rule
+                      project_storage_Attribute
+                      project_storage_IndexManager
+                      project_storage_PrimaryKeyIndex
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_types_Type
+                      project_utility_ContainerUtil
+                      project_utility_Macros
+                      project_utility_MemoryUtil)
+target_link_libraries(project_optimizer_rules_CreateTableViews
+                      project_optimizer_AttributeReference
+                      project_optimizer_Comparison
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Selection
+                      project_optimizer_TableReference
+                      project_optimizer_TableView
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_storage_Attribute
+                      project_storage_AttributeStatistics
+                      project_storage_Relation
+                      project_storage_RelationStatistics
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_EliminatePredicateLiteral
+                      glog
+                      project_optimizer_Aggregate
+                      project_optimizer_EquiJoin
+                      project_optimizer_EquiJoinAggregate
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_PredicateLiteral
+                      project_optimizer_Selection
+                      project_optimizer_TableReference
+                      project_optimizer_TableView
+                      project_optimizer_TopLevelPlan
+                      project_optimizer_rules_Rule
+                      project_storage_Database
+                      project_storage_Relation
+                      project_storage_StorageTypedefs
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_FuseOperators
+                      glog
+                      project_optimizer_Aggregate
+                      project_optimizer_EquiJoin
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Selection
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_GenerateJoins
+                      project_optimizer_AttributeReference
+                      project_optimizer_Comparison
+                      project_optimizer_EquiJoin
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_Filter
+                      project_optimizer_MultiwayCartesianJoin
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_TopDownRule
+                      project_storage_Attribute
+                      project_storage_Database
+                      project_types_Type
+                      project_utility_ContainerUtil
+                      project_utility_DisjointSetForest
+                      project_utility_Macros
+                      project_utility_MemoryUtil)
+target_link_libraries(project_optimizer_rules_GenerateSelection
+                      project_optimizer_Filter
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Project
+                      project_optimizer_Selection
+                      project_optimizer_rules_TopDownRule
+                      project_utility_Macros
+                      project_utility_MemoryUtil)
+target_link_libraries(project_optimizer_rules_LiftUpExtraEquiJoinPredicate
+                      glog
+                      project_optimizer_AttributeReference
+                      project_optimizer_Comparison
+                      project_optimizer_EquiJoin
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Selection
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_storage_Attribute
+                      project_storage_IndexManager
+                      project_storage_Relation
+                      project_utility_ContainerUtil
+                      project_utility_Macros
+                      project_utility_MemoryUtil)
+target_link_libraries(project_optimizer_rules_PopulateFilterOnJoinAttributes
+                      project_optimizer_AttributeReference
+                      project_optimizer_Comparison
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_Filter
+                      project_optimizer_MultiwayCartesianJoin
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_rules_TopDownRule
+                      project_utility_DisjointSetForest
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_PruneColumns
+                      project_optimizer_AttributeReference
+                      project_optimizer_Plan
+                      project_optimizer_rules_TopDownRule
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_PushDownFilter
+                      project_optimizer_AttributeReference
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_Filter
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_rules_TopDownRule
+                      project_utility_ContainerUtil
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_ReducePredicate
+                      glog
+                      project_optimizer_Comparison
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_OptimizerContext
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_PredicateLiteral
+                      project_optimizer_ScalarLiteral
+                      project_optimizer_Selection
+                      project_optimizer_rules_BottomUpRule
+                      project_types_Type
+                      project_utility_ContainerUtil
+                      project_utility_Macros
+                      project_utility_Range)
+target_link_libraries(project_optimizer_rules_ReduceSemiJoin
+                      glog
+                      project_optimizer_EquiJoin
+                      project_optimizer_Expression
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Selection
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_optimizer_rules_UpdateExpression
+                      project_storage_Database
+                      project_utility_Macros
+                      project_utility_MemoryUtil)
+target_link_libraries(project_optimizer_rules_ReorderJoins
+                      glog
+                      project_optimizer_Alias
+                      project_optimizer_AttributeReference
+                      project_optimizer_EquiJoin
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Scalar
+                      project_optimizer_Selection
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_Rule
+                      project_storage_Attribute
+                      project_storage_Database
+                      project_storage_Relation
+                      project_utility_ContainerUtil
+                      project_utility_DisjointSetForest
+                      project_utility_HashPair
+                      project_utility_Macros
+                      project_utility_MemoryUtil)
+target_link_libraries(project_optimizer_rules_ResolveAlias
+                      glog
+                      project_optimizer_Aggregate
+                      project_optimizer_Alias
+                      project_optimizer_EquiJoin
+                      project_optimizer_ExprId
+                      project_optimizer_Expression
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Scalar
+                      project_optimizer_Selection
+                      project_optimizer_rules_BottomUpRule
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_ReuseAggregateExpressions
+                      glog
+                      project_optimizer_Aggregate
+                      project_optimizer_AggregateFunction
+                      project_optimizer_Alias
+                      project_optimizer_AttributeReference
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Scalar
+                      project_optimizer_Selection
+                      project_optimizer_rules_BottomUpRule
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_Rule
+                      project_optimizer_Plan
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_SpecializeChainedJoinAggregate
+                      glog
+                      project_optimizer_Aggregate
+                      project_optimizer_AggregateFunction
+                      project_optimizer_Alias
+                      project_optimizer_AttributeReference
+                      project_optimizer_ChainedJoinAggregate
+                      project_optimizer_EquiJoin
+                      project_optimizer_EquiJoinAggregate
+                      project_optimizer_ExprId
+                      project_optimizer_Expression
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Scalar
+                      project_optimizer_Selection
+                      project_optimizer_rules_BottomUpRule
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_SpecializeForeignKeyIndexJoinAggregate
+                      glog
+                      project_optimizer_Aggregate
+                      project_optimizer_AttributeReference
+                      project_optimizer_EquiJoin
+                      project_optimizer_EquiJoinAggregate
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Selection
+                      project_optimizer_TableReference
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_storage_Attribute
+                      project_storage_IndexManager
+                      project_storage_Relation
+                      project_utility_ContainerUtil
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_SpecializeMultiwayJoinAggregate
+                      glog
+                      project_optimizer_Aggregate
+                      project_optimizer_AggregateFunction
+                      project_optimizer_Alias
+                      project_optimizer_AttributeReference
+                      project_optimizer_EquiJoin
+                      project_optimizer_EquiJoinAggregate
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_MultiwayEquiJoinAggregate
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Scalar
+                      project_optimizer_Selection
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_storage_Attribute
+                      project_storage_Relation
+                      project_utility_ContainerUtil
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_SpecializePrimaryKeyIndexJoin
+                      glog
+                      project_optimizer_EquiJoin
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Selection
+                      project_optimizer_TableReference
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_storage_Attribute
+                      project_storage_IndexManager
+                      project_storage_Relation
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_SpecializePrimaryKeyIndexJoinAggregate
+                      glog
+                      project_optimizer_Aggregate
+                      project_optimizer_AttributeReference
+                      project_optimizer_EquiJoin
+                      project_optimizer_EquiJoinAggregate
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Selection
+                      project_optimizer_TableReference
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_storage_Attribute
+                      project_storage_Database
+                      project_storage_IndexManager
+                      project_storage_Relation
+                      project_utility_ContainerUtil
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_SpecializePrimaryKeyScanJoinAggregate
+                      glog
+                      project_operators_expressions_ComparisonType
+                      project_optimizer_Aggregate
+                      project_optimizer_AggregateFunction
+                      project_optimizer_Alias
+                      project_optimizer_AttributeReference
+                      project_optimizer_EquiJoin
+                      project_optimizer_EquiJoinAggregate
+                      project_optimizer_ExprId
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Scalar
+                      project_optimizer_Selection
+                      project_optimizer_TableReference
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_storage_StorageTypedefs
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_SpecializeSelection
+                      glog
+                      project_optimizer_AttributeReference
+                      project_optimizer_Comparison
+                      project_optimizer_Expression
+                      project_optimizer_ExpressionUtil
+                      project_optimizer_PatternMatcher
+                      project_optimizer_Plan
+                      project_optimizer_Predicate
+                      project_optimizer_Scalar
+                      project_optimizer_Selection
+                      project_optimizer_TableReference
+                      project_optimizer_cost_SimpleCostModel
+                      project_optimizer_rules_BottomUpRule
+                      project_storage_IndexManager
+                      project_storage_Relation
+                      project_utility_Macros
+                      project_utility_MemoryUtil)
+target_link_libraries(project_optimizer_rules_TopDownRule
+                      glog
+                      project_optimizer_rules_Rule
+                      project_utility_Macros)
+target_link_libraries(project_optimizer_rules_UpdateExpression
+                      project_optimizer_AttributeReference
+                      project_optimizer_ExprId
+                      project_optimizer_Expression
+                      project_optimizer_PatternMatcher
+                      project_optimizer_rules_BottomUpRule
+                      project_utility_Macros)
