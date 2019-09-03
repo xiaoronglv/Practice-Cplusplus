@@ -2,9 +2,12 @@ Testing Protocol
 
 ## step1: Feed the data
 
+```
 filename \n
 filename \n
 filename \n
+Done
+```
 
 
 Binary format of relation consists of
