@@ -7,6 +7,8 @@
 //---------------------------------------------------------------------------
 using namespace std;
 //---------------------------------------------------------------------------
+// Ryan's Question: what does string& mean?
+// pass by reference.
 static void splitString(string& line,vector<unsigned>& result,const char delimiter)
 // Split a line into numbers
 {
@@ -27,7 +29,7 @@ static void splitString(string& line,vector<string>& result,const char delimiter
     }
 }
 //---------------------------------------------------------------------------
-static void splitPredicates(string& line,vector<string>& result)
+static void splitPredicates(string& line, vector<string>& result)
 // Split a line into predicate strings
 {
     // Determine predicate type
@@ -49,19 +51,22 @@ static SelectInfo parseRelColPair(string& raw)
 {
     vector<unsigned> ids;
     splitString(raw,ids,'.');
-    return SelectInfo(0,ids[0],ids[1]);
+    // Ryan's Comments: This is a constructor. ()
+    // why is the first argument is zero? I guess it doesn't matter.
+    return SelectInfo(0,ids[0],ids[1]); 
 }
 //---------------------------------------------------------------------------
 inline static bool isConstant(string& raw) { return raw.find('.')==string::npos; }
 //---------------------------------------------------------------------------
-void QueryInfo::parsePredicate(string& rawPredicate)
+void QueryInfo::parsePredicate(string& rawPredicate) // "0.1=1.2"
 // Parse a single predicate: join "r1Id.col1Id=r2Id.col2Id" or "r1Id.col1Id=constant" filter
 {
-    vector<string> relCols;
+    vector<string> relCols; // [0.1, 1.2]
     splitPredicates(rawPredicate,relCols);
     assert(relCols.size()==2);
-    assert(!isConstant(relCols[0])&&"left side of a predicate is always a SelectInfo");
-    auto leftSelect=parseRelColPair(relCols[0]);
+    // isConstant 0.1=3
+    assert(!isConstant(relCols[0])&&"left side of a predicate is always a SelectInfo"); 
+    auto leftSelect=parseRelColPair(relCols[0]); // SelectInfo
     if (isConstant(relCols[1])) {
         uint64_t constant=stoul(relCols[1]);
         char compType=rawPredicate[relCols[0].size()];
@@ -69,7 +74,7 @@ void QueryInfo::parsePredicate(string& rawPredicate)
     } else {
         auto rightSelect=parseRelColPair(relCols[1]);
     
-        if (leftSelect < rightSelect) {
+        if (leftSelect < rightSelect) { // compare the binding
             PredicateInfo p(leftSelect, rightSelect);
             if (find(predicates.begin(), predicates.end(), p) == predicates.end())  
                 predicates.emplace_back(move(p));
@@ -90,8 +95,8 @@ void QueryInfo::parsePredicates(string& text)
 {
     vector<string> predicateStrings;
     splitString(text,predicateStrings,'&');
-    for (auto& rawPredicate : predicateStrings) {
-        parsePredicate(rawPredicate);
+    for (auto& rawPredicate : predicateStrings) { // ["0.1 = 1.2", "1.0 = 2.1"]
+        parsePredicate(rawPredicate); // "0.1 = 1.2"
    }
 }
 //---------------------------------------------------------------------------
@@ -126,6 +131,7 @@ void QueryInfo::parseSelections(string& rawSelections)
 //---------------------------------------------------------------------------
 static void resolveIds(vector<unsigned>& relationIds,SelectInfo& selectInfo)
 // Resolve relation id
+// Ryan's Comments: got it.
 {
     selectInfo.relId=relationIds[selectInfo.binding];
 }
@@ -170,6 +176,7 @@ void QueryInfo::reorderPredicates() {
     });
 }
 //---------------------------------------------------------------------------
+// example: "0 2 4|0.1=1.2&1.0=2.1&0.1>3000|0.0 1.1"
 void QueryInfo::parseQuery(string& rawQuery)
 // Parse query [RELATIONS]|[PREDICATES]|[SELECTS]
 {
@@ -177,16 +184,17 @@ void QueryInfo::parseQuery(string& rawQuery)
     vector<string> queryParts;
     splitString(rawQuery,queryParts,'|');
     assert(queryParts.size()==3);
-    parseRelationIds(queryParts[0]);
-    parsePredicates(queryParts[1]);
-    addFilterPredicates();
+    parseRelationIds(queryParts[0]); // "0 2 4" => [0, 2, 4]
+    parsePredicates(queryParts[1]);  
+    addFilterPredicates();  // Ryan's Question: what is this method used for?
     /*
     cerr << "-------qurey join before----" << endl;
     for (auto& pre : predicates) {
         cerr << pre.dumpText() << endl;
     }
     */
-    reorderPredicates();
+    // Ryan's Comments: re-order the predicate based on comparison operatro?
+    reorderPredicates(); 
     /*
     cerr << "-------qurey join after----" << endl;
     for (auto& pre : predicates) {

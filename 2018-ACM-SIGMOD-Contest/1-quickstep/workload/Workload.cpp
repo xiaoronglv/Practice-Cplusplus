@@ -57,7 +57,7 @@ void Workload::loadTables(const std::vector<std::string> &filenames,
         for (std::size_t i = 0; i < filenames.size(); ++i) {
           ctx->spawnLambdaTask([this, &relations, &filenames, i](Task *ctx) {
             std::unique_ptr<Relation> &relation = relations[i];
-            relation.reset(this->loadTable(filenames[i]));
+            relation.reset(this->loadTable(filenames[i]));  // load table
           });
         }
       }),
@@ -66,7 +66,7 @@ void Workload::loadTables(const std::vector<std::string> &filenames,
           this->database_.addRelation(relation.release());
         }
         TableAnalyzer analyzer;
-        analyzer.analyzeDatabase(ctx, &this->database_);
+        analyzer.analyzeDatabase(ctx, &this->database_);  // analyze database
       }),
       CreateLambdaTask([&sync_lock] {
         sync_lock.release();
@@ -106,7 +106,7 @@ std::vector<std::string> Workload::evaluateQueries(
                 std::make_unique<O::QueryHandle>(this->query_id_counter_ + i);
 
             O::Optimizer optimizer(&this->database_);
-            optimizer.generateQueryHandle(queries[i], handle.get());
+            optimizer.generateQueryHandle(queries[i], handle.get()); // generate query plan
 
             if (handle->getExecutionPlan()->size() != 0) {
               internal->spawnTask(handle->releaseExecutionPlan());

@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige",
+  "command": "/usr/bin/c++  -DNO_CORO -I/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src  -O3 -DNDEBUG -march=native -mtune=native   -W -Wall -Wextra -Wnon-virtual-dtor -Wno-deprecated-declarations -pthread -std=gnu++1z -o CMakeFiles/tests_programming_contest.dir/src/basis/Numa.cpp.o -c /home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/basis/Numa.cpp",
+  "file": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/basis/Numa.cpp"
+},
+{
+  "directory": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige",
+  "command": "/usr/bin/c++  -DNO_CORO -I/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src  -O3 -DNDEBUG -march=native -mtune=native   -W -Wall -Wextra -Wnon-virtual-dtor -Wno-deprecated-declarations -pthread -std=gnu++1z -o CMakeFiles/tests_programming_contest.dir/src/basis/TaskScheduler.cpp.o -c /home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/basis/TaskScheduler.cpp",
+  "file": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/basis/TaskScheduler.cpp"
+},
+{
+  "directory": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige",
+  "command": "/usr/bin/c++  -DNO_CORO -I/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src  -O3 -DNDEBUG -march=native -mtune=native   -W -Wall -Wextra -Wnon-virtual-dtor -Wno-deprecated-declarations -pthread -std=gnu++1z -o CMakeFiles/tests_programming_contest.dir/src/database/ColumnPartition.cpp.o -c /home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/database/ColumnPartition.cpp",
+  "file": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/database/ColumnPartition.cpp"
+},
+{
+  "directory": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige",
+  "command": "/usr/bin/c++  -DNO_CORO -I/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src  -O3 -DNDEBUG -march=native -mtune=native   -W -Wall -Wextra -Wnon-virtual-dtor -Wno-deprecated-declarations -pthread -std=gnu++1z -o CMakeFiles/tests_programming_contest.dir/src/query_processor/Batch.cpp.o -c /home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/query_processor/Batch.cpp",
+  "file": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/query_processor/Batch.cpp"
+},
+{
+  "directory": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige",
+  "command": "/usr/bin/c++  -DNO_CORO -I/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src  -O3 -DNDEBUG -march=native -mtune=native   -W -Wall -Wextra -Wnon-virtual-dtor -Wno-deprecated-declarations -pthread -std=gnu++1z -o CMakeFiles/tests_programming_contest.dir/src/query_processor/PrefixBitmap.cpp.o -c /home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/query_processor/PrefixBitmap.cpp",
+  "file": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/query_processor/PrefixBitmap.cpp"
+},
+{
+  "directory": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige",
+  "command": "/usr/bin/c++  -DNO_CORO -I/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src  -O3 -DNDEBUG -march=native -mtune=native   -W -Wall -Wextra -Wnon-virtual-dtor -Wno-deprecated-declarations -pthread -std=gnu++1z -o CMakeFiles/tests_programming_contest.dir/src/tests/TestsProgrammingContest.cpp.o -c /home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/tests/TestsProgrammingContest.cpp",
+  "file": "/home/xiaoronglv/Workspace/Practice-Cplusplus/2018-ACM-SIGMOD-Contest/5-flomige/src/tests/TestsProgrammingContest.cpp"
+}
+]

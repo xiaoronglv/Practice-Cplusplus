@@ -32,11 +32,11 @@ int main(int argc, char *argv[]) {
     relations.emplace_back(line);
   }
 
-  container->startEvent("Table load time");  // Ryan's TODO: what does -> mean? invoke method call on a pointer.
+  container->startEvent("Table load time");
 
   // A separate scheduler for loading tables.
   // For convenience of single-thread query evaluation benchmarking.
-  std::unique_ptr<project::Scheduler> scheduler =
+  std::unique_ptr<project::Scheduler> scheduler = 
       std::make_unique<project::Scheduler>(std::thread::hardware_concurrency());
   scheduler->start();
 

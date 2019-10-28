@@ -65,6 +65,10 @@ struct FilterInfo {
 };
 static const std::vector<FilterInfo::Comparison> comparisonTypes { FilterInfo::Comparison::Less, FilterInfo::Comparison::Greater, FilterInfo::Comparison::Equal};
 //---------------------------------------------------------------------------
+
+// In the begining I am a little confused, because the author seems forget to handle < and >.
+// But finally I get the point, = is the only operator for join.
+// great progress, Ryan!
 struct PredicateInfo {
     /// Left
     SelectInfo left;

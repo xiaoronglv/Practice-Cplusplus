@@ -21,6 +21,7 @@ Relation& Joiner::getRelation(unsigned relationId)
 // Loads a relation from disk
 {
   if (relationId >= relations.size()) {
+    // Answered: what does cerr mean? standard error
     cerr << "Relation with id: " << relationId << " does not exist" << endl;
     throw;
   }

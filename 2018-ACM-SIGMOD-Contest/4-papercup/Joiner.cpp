@@ -119,15 +119,6 @@ void Joiner::join(QueryInfo& query, int queryIndex)
     auto right=addScan(usedRelations,firstJoin.right,query);
     
     shared_ptr<Operator> root=make_shared<Join>(left, right, firstJoin);
-#ifdef VERBOSE
-    unsigned opIdx = 0;
-    left->setOperatorIndex(opIdx++);
-    right->setOperatorIndex(opIdx++);
-    root->setOperatorIndex(opIdx++);
-    left->setQeuryIndex(queryIndex);
-    right->setQeuryIndex(queryIndex);
-    root->setQeuryIndex(queryIndex);
-#endif
     left->setParent(root);
     right->setParent(root); 
 
@@ -140,13 +131,7 @@ void Joiner::join(QueryInfo& query, int queryIndex)
             case QueryGraphProvides::Left:
                 left=root;
                 right=addScan(usedRelations,rightInfo,query);
-                root=make_shared<Join>(left, right,pInfo);
-#ifdef VERBOSE
-                right->setOperatorIndex(opIdx++);
-                root->setOperatorIndex(opIdx++);
-                right->setQeuryIndex(queryIndex);
-                root->setQeuryIndex(queryIndex);
-#endif
+                root=make_shared<Join>(left, right,pInfo); 
                 left->setParent(root);
                 right->setParent(root);
                 break;
@@ -154,12 +139,6 @@ void Joiner::join(QueryInfo& query, int queryIndex)
                 left=addScan(usedRelations,leftInfo,query);
                 right=root;
                 root=make_shared<Join>(left,right,pInfo);
-#ifdef VERBOSE
-                left->setOperatorIndex(opIdx++);
-                root->setOperatorIndex(opIdx++);
-                left->setQeuryIndex(queryIndex);
-                root->setQeuryIndex(queryIndex);
-#endif
                 left->setParent(root);
                 right->setParent(root);
                 break;
@@ -168,10 +147,6 @@ void Joiner::join(QueryInfo& query, int queryIndex)
                 // Thus, we have either a cycle in our join graph or more than one join predicate per join.
                 left = root;
                 root=make_shared<SelfJoin>(left,pInfo);
-#ifdef VERBOSE
-                root->setOperatorIndex(opIdx++);
-                root->setQeuryIndex(queryIndex);
-#endif
                 left->setParent(root);
                 break;
             case QueryGraphProvides::None:
@@ -200,7 +175,7 @@ void Joiner::createAsyncQueryTask(string line)
     QueryInfo query;
     query.parseQuery(line);
     asyncJoins.emplace_back();
-    asyncResults.emplace_back();
+    asyncResults.emplace_back(); // Ryan's TODO: hwh
     
     ioService.post(bind(&Joiner::join, this, query, nextQueryIndex)); 
     __sync_fetch_and_add(&nextQueryIndex, 1);

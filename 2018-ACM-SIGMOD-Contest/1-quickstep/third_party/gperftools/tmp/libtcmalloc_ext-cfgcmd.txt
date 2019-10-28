@@ -1,0 +1,1 @@
+cmd='<SOURCE_DIR>/configure;--prefix=<INSTALL_DIR>;--enable-minimal;--disable-debugalloc;CC=/usr/bin/cc;CXX=/usr/bin/c++;CFLAGS=;CXXFLAGS='

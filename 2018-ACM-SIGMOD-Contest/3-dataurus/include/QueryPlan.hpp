@@ -27,7 +27,7 @@ struct ColumnInfo {
     uint64_t size;     // Total number of elements
     uint64_t distinct; // Number of distinct elements
     uint64_t n;        // The size of the domain
-    double spread;     // The spread of the values in the domain
+    double spread;     // The spread of the values in the domain  // Ryan's Question: what does spread mean?
 
     unsigned counter; // Number of times the column appears in the query
     bool isSelectionColumn;
@@ -90,6 +90,7 @@ struct JoinTreeNode {
 struct JoinTree {
     JoinTreeNode* root;
 
+    // Ryan's Note: Return a pointer.
     // Constructs a JoinTree from a set of relations
     JoinTree* build(QueryInfo& queryInfoPtr, ColumnInfo** columnInfos);
 
